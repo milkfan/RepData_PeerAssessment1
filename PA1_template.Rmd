@@ -2,7 +2,7 @@
 ========================================================
 
 ```{r setOptions, echo = FALSE}
-opts_chuck$set(echo=TRUE, results = "asis")
+opts_chunk$set(echo=TRUE, results = "asis")
 ```
 
 
@@ -24,8 +24,8 @@ hist(sum_steps, main="histogram of total steps per day with missing values", xla
 mean <- mean(sum_steps,na.rm=TRUE)
 median <- median(sum_steps, na.rm=TRUE)
 ```
-Mean total number of steps taken per day is `{r mean}`
-Median total number of steps taken per day is `{r median}`
+Mean total number of steps taken per day is `r mean`
+Median total number of steps taken per day is `r median`
 
 ## What is the average daily activity pattern?
 ```{r}
@@ -34,9 +34,10 @@ qplot(interval, steps, data=activity, stat="summary", fun.y="mean",  geom = "lin
 interval_steps <- sapply(split(activity, activity$interval), function(d){mean(d$steps, na.rm = TRUE)})
 mstep <- which.max(interval_steps)
 ```
-Interval No.`{r names(mstep)}` has the maximum value.
+Interval `r names(mstep)` has the maximum value `r max(interval_steps)`.
 
 ## Imputing missing values
+The strategy is to replace NA with the average steps of that interval across days, which are computed above.
 ```{r}
 sum(is.na(activity$steps))
 activity_fill <-data.frame(activity)
@@ -56,7 +57,7 @@ mean(sum_steps_fill)
 median(sum_steps_fill)
 ```
 
-These values do differ from the estimates from the first part of the assignment. Imputing missing data decreases the estimates of the total daily number of steps slightly.
+These values does not differ much from the estimates from the first part of the assignment. Imputing missing data seems to have no obvious effect on the estimates of the total daily number of steps slightly.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?

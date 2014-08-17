@@ -183,31 +183,26 @@ hljs.initHighlightingOnLoad();
 
 <h1></h1>
 
-<pre><code>## Error: object &#39;opts_chuck&#39; not found
-</code></pre>
-
 <h2>Loading and preprocessing the data</h2>
 
 <pre><code class="r">activity &lt;- read.csv(&quot;activity.csv&quot;, na.strings = &quot;NA&quot;)
 head(activity)
 </code></pre>
 
-<pre><code>##   steps       date interval
-## 1    NA 2012-10-01        0
-## 2    NA 2012-10-01        5
-## 3    NA 2012-10-01       10
-## 4    NA 2012-10-01       15
-## 5    NA 2012-10-01       20
-## 6    NA 2012-10-01       25
-</code></pre>
+<p>steps       date interval
+1    NA 2012-10-01        0
+2    NA 2012-10-01        5
+3    NA 2012-10-01       10
+4    NA 2012-10-01       15
+5    NA 2012-10-01       20
+6    NA 2012-10-01       25</p>
 
 <pre><code class="r">dates &lt;- activity$date
 dates &lt;- as.Date(as.character(dates), &quot;%Y-%m-%d&quot;)
 str(dates)
 </code></pre>
 
-<pre><code>##  Date[1:17568], format: &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; &quot;2012-10-01&quot; ...
-</code></pre>
+<p>Date[1:17568], format: &ldquo;2012-10-01&rdquo; &ldquo;2012-10-01&rdquo; &ldquo;2012-10-01&rdquo; &ldquo;2012-10-01&rdquo; &hellip;</p>
 
 <pre><code class="r">activity$date &lt;- dates
 </code></pre>
@@ -228,8 +223,8 @@ mean &lt;- mean(sum_steps, na.rm = TRUE)
 median &lt;- median(sum_steps, na.rm = TRUE)
 </code></pre>
 
-<p>Mean total number of steps taken per day is <code>{r mean}</code>
-Median total number of steps taken per day is <code>{r median}</code></p>
+<p>Mean total number of steps taken per day is 1.0766 &times; 10<sup>4</sup>
+Median total number of steps taken per day is 10765</p>
 
 <h2>What is the average daily activity pattern?</h2>
 
@@ -248,15 +243,16 @@ qplot(interval, steps, data = activity, stat = &quot;summary&quot;, fun.y = &quo
 mstep &lt;- which.max(interval_steps)
 </code></pre>
 
-<p>Interval No.<code>{r names(mstep)}</code> has the maximum value.</p>
+<p>Interval 835 has the maximum value 206.1698.</p>
 
 <h2>Imputing missing values</h2>
+
+<p>The strategy is to replace NA with the average steps of that interval across days, which are computed above.</p>
 
 <pre><code class="r">sum(is.na(activity$steps))
 </code></pre>
 
-<pre><code>## [1] 2304
-</code></pre>
+<p>[1] 2304</p>
 
 <pre><code class="r">activity_fill &lt;- data.frame(activity)
 for (i in 1:dim(activity)[1]) {
@@ -267,8 +263,7 @@ for (i in 1:dim(activity)[1]) {
 sum(is.na(activity_fill$steps))
 </code></pre>
 
-<pre><code>## [1] 0
-</code></pre>
+<p>[1] 0</p>
 
 <pre><code class="r">
 sum_steps_fill &lt;- sapply(split(activity_fill, activity_fill$date), function(d) {
@@ -285,14 +280,12 @@ hist(sum_steps_fill, main = &quot;histogram of total steps per day after filling
 <pre><code class="r">mean(sum_steps_fill)
 </code></pre>
 
-<pre><code>## [1] 10766
-</code></pre>
+<p>[1] 10766</p>
 
 <pre><code class="r">median(sum_steps_fill)
 </code></pre>
 
-<pre><code>## [1] 10766
-</code></pre>
+<p>[1] 10766</p>
 
 <p>These values do differ from the estimates from the first part of the assignment. Imputing missing data decreases the estimates of the total daily number of steps slightly.</p>
 
@@ -301,8 +294,7 @@ hist(sum_steps_fill, main = &quot;histogram of total steps per day after filling
 <pre><code class="r">Sys.setlocale(locale = &quot;C&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;C&quot;
-</code></pre>
+<p>[1] &ldquo;C&rdquo;</p>
 
 <pre><code class="r">weekday &lt;- weekdays(activity_fill$date)
 for (i in 1:length(weekday)[1]) {
@@ -313,8 +305,7 @@ for (i in 1:length(weekday)[1]) {
 str(weekday)
 </code></pre>
 
-<pre><code>##  chr [1:17568] &quot;FALSE&quot; &quot;FALSE&quot; &quot;FALSE&quot; &quot;FALSE&quot; &quot;FALSE&quot; ...
-</code></pre>
+<p>chr [1:17568] &ldquo;FALSE&rdquo; &ldquo;FALSE&rdquo; &ldquo;FALSE&rdquo; &ldquo;FALSE&rdquo; &ldquo;FALSE&rdquo; &hellip;</p>
 
 <pre><code class="r">
 activity_fill$weekday &lt;- factor(weekday, labels = c(&quot;weekday&quot;, &quot;weekend&quot;))

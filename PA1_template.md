@@ -2,9 +2,6 @@
 ========================================================
 
 
-```
-## Error: object 'opts_chuck' not found
-```
 
 
 
@@ -15,15 +12,13 @@ activity <- read.csv("activity.csv", na.strings = "NA")
 head(activity)
 ```
 
-```
-##   steps       date interval
-## 1    NA 2012-10-01        0
-## 2    NA 2012-10-01        5
-## 3    NA 2012-10-01       10
-## 4    NA 2012-10-01       15
-## 5    NA 2012-10-01       20
-## 6    NA 2012-10-01       25
-```
+  steps       date interval
+1    NA 2012-10-01        0
+2    NA 2012-10-01        5
+3    NA 2012-10-01       10
+4    NA 2012-10-01       15
+5    NA 2012-10-01       20
+6    NA 2012-10-01       25
 
 ```r
 dates <- activity$date
@@ -31,9 +26,7 @@ dates <- as.Date(as.character(dates), "%Y-%m-%d")
 str(dates)
 ```
 
-```
-##  Date[1:17568], format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
-```
+ Date[1:17568], format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
 
 ```r
 activity$date <- dates
@@ -58,8 +51,8 @@ mean <- mean(sum_steps, na.rm = TRUE)
 median <- median(sum_steps, na.rm = TRUE)
 ```
 
-Mean total number of steps taken per day is `{r mean}`
-Median total number of steps taken per day is `{r median}`
+Mean total number of steps taken per day is 1.0766 &times; 10<sup>4</sup>
+Median total number of steps taken per day is 10765
 
 ## What is the average daily activity pattern?
 
@@ -81,17 +74,16 @@ interval_steps <- sapply(split(activity, activity$interval), function(d) {
 mstep <- which.max(interval_steps)
 ```
 
-Interval No.`{r names(mstep)}` has the maximum value.
+Interval 835 has the maximum value 206.1698.
 
 ## Imputing missing values
+The strategy is to replace NA with the average steps of that interval across days, which are computed above.
 
 ```r
 sum(is.na(activity$steps))
 ```
 
-```
-## [1] 2304
-```
+[1] 2304
 
 ```r
 activity_fill <- data.frame(activity)
@@ -103,9 +95,7 @@ for (i in 1:dim(activity)[1]) {
 sum(is.na(activity_fill$steps))
 ```
 
-```
-## [1] 0
-```
+[1] 0
 
 ```r
 
@@ -124,17 +114,13 @@ The mean and median of the total daily number of steps are:
 mean(sum_steps_fill)
 ```
 
-```
-## [1] 10766
-```
+[1] 10766
 
 ```r
 median(sum_steps_fill)
 ```
 
-```
-## [1] 10766
-```
+[1] 10766
 
 
 These values do differ from the estimates from the first part of the assignment. Imputing missing data decreases the estimates of the total daily number of steps slightly.
@@ -146,9 +132,7 @@ These values do differ from the estimates from the first part of the assignment.
 Sys.setlocale(locale = "C")
 ```
 
-```
-## [1] "C"
-```
+[1] "C"
 
 ```r
 weekday <- weekdays(activity_fill$date)
@@ -160,9 +144,7 @@ for (i in 1:length(weekday)[1]) {
 str(weekday)
 ```
 
-```
-##  chr [1:17568] "FALSE" "FALSE" "FALSE" "FALSE" "FALSE" ...
-```
+ chr [1:17568] "FALSE" "FALSE" "FALSE" "FALSE" "FALSE" ...
 
 ```r
 
