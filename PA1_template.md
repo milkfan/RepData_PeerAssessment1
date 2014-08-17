@@ -123,7 +123,7 @@ median(sum_steps_fill)
 [1] 10766
 
 
-These values do differ from the estimates from the first part of the assignment. Imputing missing data decreases the estimates of the total daily number of steps slightly.
+These values does not differ much from the estimates from the first part of the assignment. Imputing missing data seems to have no obvious effect on the estimates of the total daily number of steps slightly.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
